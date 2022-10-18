@@ -21,8 +21,14 @@
         let conteudo = "102035857RODOCENTER COM DE RODOAR E TACOGRAFO LTDA         33327586000152100220144530703GOIANIA - GO"
         let inscricao = conteudo.substr(0,9);
         let nome = conteudo.substr(9,59);
-        let cnpj = conteudo.substr(59,14)
-        document.getElementById("conteudo").innerHTML = inscricao+' - '+nome+' - <a href="https://www.receitaws.com.br/v1/cnpj/'+cnpj+'" target="_blank">'+cnpj+'</a>';
+        let cnpj = conteudo.substr(59,14);
+        let data = conteudo.substr(73, 8);
+        let d = data.substr(0,2);
+        let m = data.substr(2,2);
+        let ano = data.substr(4,4);
+        data = d+'/'+m+'/'+ano;
+        
+        document.getElementById("conteudo").innerHTML = inscricao+' - '+nome+' - <a href="https://www.receitaws.com.br/v1/cnpj/'+cnpj+'" target="_blank">'+cnpj+'</a> - '+data;
     </script>
 
 
