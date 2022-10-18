@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML + JS</title>
+</head>
+<body>
+    <h4>Exemplo: innerHTML</h4>
+    <p id="conteudo"></p>
+
+    <script type="text/javascript">
+        document.getElementById("conteudo").innerHTML = "Tiago Caceraghi dos Santos<hr>";
+    </script>
+
+    <h4>Exemplo: innerHTML</h4>
+    <p id="conteudo"></p>
+
+    <script type="text/javascript">
+        let conteudo = "102035857RODOCENTER COM DE RODOAR E TACOGRAFO LTDA         33327586000152100220144530703GOIANIA - GO"
+        let inscricao = conteudo.substr(0,9);
+        let nome = conteudo.substr(9,59);
+        let cnpj = conteudo.substr(59,14)
+        document.getElementById("conteudo").innerHTML = inscricao+' - '+nome+' - <a href="https://www.receitaws.com.br/v1/cnpj/'+cnpj+'" target="_blank">'+cnpj+'</a>';
+    </script>
+
+
+    <h4>Exemplo: alert</h4>
+    <script type="text/javascript">
+        window.alert('Tiago Caceraghi dos Santos');
+    </script>
+    <code>
+        window.alert('Tiago Caceraghi dos Santos');<hr>
+    </code>
+
+    <h4>Exemplo: document.write</h4>
+    <script>
+        document.write('Tiago Caceraghi dos Santos');
+    </script>
+</body>
+</html>
