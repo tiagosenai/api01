@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo API</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/DataTables-1.10.21/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/Buttons-1.6.2/css/buttons.jqueryui.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/Buttons-1.6.2/css/buttons.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/Buttons-1.6.2/css/buttons.bootstrap4.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <table id="exemplo" class="display" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Inscrição</th>
+                    <th>Nome Empresarial/Nome</th>
+                    <th>Número do CNPJ/CPF</th>
+                    <th>Data Homologação</th>
+                    <th>Código CNAE</th>
+                    <th>Município</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $data_filtro = '2020-01-01';
+                    $arquivo = fopen('H01', 'r');
+                    while (!feof($arquivo)){
+                        //pega informação linha a linha
+                        $conteudo = fgets($arquivo, 1024);
+                        //pega só a inscrição
+                        $inscricao = substr($conteudo, 0,8);
+                        //pega só os nomes
+                        $nome = substr($conteudo, 9,59);
+                        //pega só CNPJ/CPF
+                        $cnpj_cpf = substr($conteudo, 59, 14);
+                        //pega só a DATA
+                        $data = substr($conteudo, 73, 8);
+                        $dd = substr($data, 0,2);
+                        $mm = substr($data, 2,2);
+                        $ano = substr($data, 4,4);
+                        $data2 = $ano.'-'.$mm.'-'.$dd;
+                        $cnae = substr($conteudo, 81, 7);
+                        $municipio = substr($conteudo, 88, 95);
+                        if (strtotime($data2) >= (strtotime($data_filtro))){
+                            $novaData = new DateTime($data2);
+                            $data2 = date_format($novaData, 'd/m/Y');
+                            
+                            //php escrevendo HTML
+                            echo '<tr>';
+                                echo '<td>'.$inscricao.'</td>';
+                                echo '<td>'.$nome.'</td>';
+                                echo '<td>'.$cnpj_cpf.'</td>';
+                                echo '<td>'.$data2.'</td>';
+                                echo '<td>'.$cnae.'</td>';
+                                echo '<td>'.$municipio.'</td>';
+                            echo '</tr>';
+                        }                       
+                    }
+                    fclose($arquivo);
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="DataTables/DataTables-1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.jqueryui.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.flash.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.html5.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.print.js"></script>
+    <script type="text/javascript" src="DataTables/pdfmake-0.1.36/pdfmake.js"></script>
+    <script type="text/javascript" src="DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="DataTables/JSZip-2.5.0/jszip.js"></script>
+
+    <!-- Padrão de exibição do Data Tables -->
+    <script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+        $('#example').DataTable( {
+
+            language:{
+                url:'Portuguese-Brasil.json'
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copiar'
+                },
+                'csv', 'excel', 'pdf',
+                {
+                    extend: 'print',
+                    text: 'Imprimir'
+                }
+            ]
+        }
+        );
+    } );
+</script>
+
+
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo API</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/DataTables-1.10.21/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/Buttons-1.6.2/css/buttons.jqueryui.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/Buttons-1.6.2/css/buttons.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/Buttons-1.6.2/css/buttons.bootstrap4.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <table id="exemplo" class="display" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Inscrição</th>
+                    <th>Nome Empresarial/Nome</th>
+                    <th>Número do CNPJ/CPF</th>
+                    <th>Data Homologação</th>
+                    <th>Código CNAE</th>
+                    <th>Município</th>
+                </tr>
+            </thead>
+            <tbody>
+                <input type="file" onchange="learArquivo(this)">
+                <script>
+                    function learArquivo(input){
+                        let arquivo = input.files[0];
+                        let leitura = new FileReader();
+
+                        leitura.readAsText(arquivo);
+                        leitura.onload = function(){
+                            console.log(leitura.result);
+                        };
+                    }
+                </script>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="DataTables/DataTables-1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.jqueryui.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.flash.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.html5.js"></script>
+    <script type="text/javascript" src="DataTables/Buttons-1.6.2/js/buttons.print.js"></script>
+    <script type="text/javascript" src="DataTables/pdfmake-0.1.36/pdfmake.js"></script>
+    <script type="text/javascript" src="DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="DataTables/JSZip-2.5.0/jszip.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
